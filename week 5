@@ -1,0 +1,50 @@
+#include <stdio.h>
+int factorial(int n);
+int fibbonacci(int n);
+void towerofhanoi(int n, char start, char auxilliary, char end);
+void main(){
+    int n;
+    printf("Enter the number for which you want the factorial \n");
+    scanf("%d", &n);
+    int fact = factorial(n);
+    printf("\nThe factorial of number %d is %d \n", n, fact);
+    printf("Enter the number upto which you want the fibbonaci series to go\n");
+    int m;
+    scanf("%d", &m);
+    int fibb = fibbonacci(m);
+    printf("\nThe fibbonacci number for %d is %d \n", m, fibb);
+    int l;
+    printf("Enter the number of rings \n");
+    scanf("%d", &l);
+    char a, b, c;
+    printf("\n Enter the names for start, auxilliary and end towers");
+    scanf("%c\n", &a);
+    scanf("%c\n", &b);
+    scanf("%c", &c);
+    towerofhanoi(l, a, b, c);
+}
+int factorial(int n){
+    if(n == 1){
+        return 1;
+    }
+    return n*factorial(n-1);
+}
+int fibbonacci(int n){
+    if(n == 0){
+        return 0;
+    }else if(n == 1){
+        return 1;
+    }
+    return fibbonacci(n-1)+fibbonacci(n-2);
+}
+void towerofhanoi(int n, char start, char auxilliary, char end){
+    if(n == 1){
+        printf("Ring %d from %c to %c", n, start, end);
+        printf("\n");
+    }else{
+        towerofhanoi(n-1, start, end, auxilliary);
+        printf("Ring %d from %c to %c ", n, start, end);
+        printf("\n");
+        towerofhanoi(n-1, auxilliary, start, end);
+    }
+}
