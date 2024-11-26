@@ -1,0 +1,109 @@
+#include<stdio.h>
+
+struct Node{
+    int data;
+    struct Node* link;
+}
+typedef struct Node node;
+
+node *ptr,*new,*curr1,*start = NULL;
+
+void create(){
+    new = (node*)malloc(sizeof(node));
+    char ch;
+    do{
+        printf("Enter value\n");
+        scanf("%d", &new1->data);
+        if(start == NULL){
+            start = new;
+            curr = new;
+        }else{
+            curr->link = new1;
+            curr = new1;
+            printf("Do you want to add another element(Y/N)");
+            scanf("%c", &ch);
+        }   
+    }while(ch == 'y'||ch == 'Y');
+}
+void Display(){
+    if(start == NULL){
+        printf("Linked list is empty");
+    }
+    printf("Elements in the list");
+    tenp = start;
+    while(temp != NULL){
+        printf("%d", temp->data);
+        temp = temp->link;
+    }
+}
+void insert_beg(){
+    new1 = (node*)malloc(sizeof(node));
+    printf("Enter element");
+    scanf("%d", &new1 -> data);
+    if(start == NULL){
+        start = new1;
+        new1->link = NULL;
+        return;
+    }
+    new1-> = start;
+    start = new1;
+}
+void insert_post(int pos){
+    new = (node*)malloc(sizeof(node));
+    printf("Enter element");
+    scanf("%d", &new1->data);
+    if(pos == 1){
+        new1->link = start;
+        start = new1;
+        return;
+    }
+    while(temp != NULL && i < pos){
+        temp = temp->linl;
+        pos++;
+    }
+    if(temp == NULL){
+        printf("Enter posistion greate than number of element\n");
+    }
+    new1->link - temp-.link;
+    temp->link = new1;
+}
+void delete_first(){
+    if(start == NULL){
+        printf("Linked List Empty \n");
+        return;
+    }
+    node temp = startl
+    start = start->link;
+    free(temp);
+}
+void main(){
+    while(1){
+        printf("1 Create \n 2.Display  \n3.Insert_Beg \n 4.Insert_pos  \n   5.Deletion  \n6.Exit");
+        int c;
+        print("Enter option");
+        scanf("%d", &c);
+        switch(c){
+            case 1:
+                create();
+                break;
+            case 2:
+                Display();
+                break;
+            case3:
+                insert_beg();
+                break;
+            case 4:
+                int pos;
+                printf("Enter position");
+                scanf("%d", &pos);
+                insert_post(pos);
+                break;
+            case 5:
+                delete_first();
+                break;
+            default:
+                exit(0);
+        }
+    
+    }
+}
