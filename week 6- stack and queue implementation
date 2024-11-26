@@ -1,0 +1,81 @@
+Stack implementation using C
+
+struct Stack {
+    struct Node* top;
+};
+
+void push(struct Stack* stack, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = stack->top;
+    stack->top = newNode;
+}
+
+int pop(struct Stack* stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty\n");
+        return -1;
+    }
+    struct Node* temp = stack->top;
+    int data = temp->data;
+    stack->top = temp->next;
+    free(temp);
+    return data;
+}
+
+int peek(struct Stack* stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty\n");
+        return -1;
+    }
+    return stack->top->data;
+}
+
+int isEmpty(struct Stack* stack) {
+    return stack->top == NULL;
+}
+
+
+Queue implementation using C
+
+
+struct Queue {
+    struct Node* front;
+    struct Node* rear;
+};
+void enqueue(struct Queue* queue, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    if (isEmpty(queue)) {
+        queue->front = queue->rear = newNode;
+    } else {
+        queue->rear->next = newNode;
+        queue->rear = newNode;
+    }
+}
+int dequeue(struct Queue* queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty\n");
+        return -1;
+    }
+    struct Node* temp = queue->front;
+    int data = temp->data;
+    queue->front = temp->next;
+    free(temp);
+
+    if (queue->front == NULL) {
+        queue->rear = NULL;
+    }
+    return data;
+}
+int peek(struct Queue* queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty\n");
+        return -1;
+    }
+    return queue->front->data;
+}
+int isEmpty(struct Queue* queue) {
+    return queue->front == NULL;
+}
