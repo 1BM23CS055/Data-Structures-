@@ -1,4 +1,5 @@
-Stack implementation using C
+ARYAN NAVLANI
+1BM23CS055
 
 struct Stack {
     struct Node* top;
