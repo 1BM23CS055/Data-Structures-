@@ -1,3 +1,7 @@
+ARYAN NAVLANI 
+1BM23CS055
+
+
 #include <stdio.h>
 #define MAX_SIZE 5
 int queue[MAX_SIZE];
