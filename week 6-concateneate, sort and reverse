@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+struct Node* newNode(int data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
+}
+
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+
+struct Node* concatenateLists(struct Node* head1, struct Node* head2) {
+    if (head1 == NULL)
+        return head2;
+    if (head2 == NULL)
+        return head1;
+
+    struct Node* temp = head1;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = head2;
+    return head1;
+}
+
+
+void sortList(struct Node** head_ref) {
+    struct Node* current = *head_ref, *next = NULL, *temp = NULL;
+
+    if (current == NULL)
+        return;
+
+    do {
+        next = current->next;
+        while (next != NULL) {
+            if (current->data > next->data) {
+                temp = current->data;
+                current->data = next->data;
+                next->data = temp;
+            }
+            next = next->next;
+        }
+        current = current->next;
+    } while (current != NULL);
+}
+
+
+void reverseList(struct Node** head_ref) {
+    struct Node* prev = NULL, *current = *head_ref, *next = NULL;
+
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    *head_ref = prev;
+}
+
+int main() {
+
+    struct Node* head1 = newNode(1);
+    head1->next = newNode(3);
+    head1->next->next = newNode(5);
+
+    struct Node* head2 = newNode(2);
+    head2->next = newNode(4);
+    head2->next->next = newNode(6);
+
+    printf("First List: ");
+    printList(head1);
+    printf("Second List: ");
+    printList(head2);
+
+    head1 = concatenateLists(head1, head2);
+    printf("Concatenated List: ");
+    printList(head1);
+
+
+    sortList(&head1);
+    printf("Sorted List: ");
+    printList(head1);
+
+    
+    reverseList(&head1);
+    printf("Reversed List: ");
+    printList(head1);
+
+    return 0;
+}
