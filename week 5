@@ -1,3 +1,7 @@
+ARYAN NAVLANI 
+1BM23CS055
+
+
 #include <stdio.h>
 int factorial(int n);
 int fibbonacci(int n);
