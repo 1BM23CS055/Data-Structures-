@@ -1,0 +1,125 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+} Node;
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insert(Node** head, int data) {
+    Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    newNode->prev = temp;
+}
+
+void insertleft(Node** head, int target, int data) {
+    Node* newNode = createNode(data);
+    Node* temp = *head;
+    while (temp != NULL && temp->data != target) {
+        temp = temp->next;
+    }
+    if (temp == NULL) {
+        printf("Target node not found.\n");
+        free(newNode);
+        return;
+    }
+    newNode->next = temp;
+    newNode->prev = temp->prev;
+    if (temp->prev != NULL) {
+        temp->prev->next = newNode;
+    } else {
+        *head = newNode;
+    }
+    temp->prev = newNode;
+}
+
+void delete_value(Node** head, int target) {
+    Node* temp = *head;
+    while (temp != NULL && temp->data != target) {
+        temp = temp->next;
+    }
+    if (temp == NULL) {
+        printf("Node with value %d not found.\n", target);
+        return;
+    }
+    if (temp->prev != NULL) {
+        temp->prev->next = temp->next;
+    } else {
+        *head = temp->next;
+    }
+    if (temp->next != NULL) {
+        temp->next->prev = temp->prev;
+    }
+    free(temp);
+    printf("Node with value %d deleted.\n", target);
+}
+
+void display(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    Node* head = NULL;
+    int choice, data, target;
+
+    while (1) {
+        printf("Menu:\n");
+        printf("1. Insert data\n");
+        printf("2. Insert new node to left of a given value\n");
+        printf("3. Delete node with a specific value\n");
+        printf("4. Display list\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                insert(&head, data);
+                break;
+            case 2:
+                printf("Enter target value: ");
+                scanf("%d", &target);
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                insertleft(&head, target, data);
+                break;
+            case 3:
+                printf("Enter value to delete: ");
+                scanf("%d", &target);
+                delete_value(&head, target);
+                break;
+            case 4:
+                display(head);
+                break;
+            case 5:
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
